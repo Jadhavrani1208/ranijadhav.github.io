@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  /* Color system: deep ink navy + warm brass accent (coffee/terminal tone, not neon) */
+  --color-ink: #0a0d12;
+  --color-ink-soft: #0f131a;
+  --color-surface: #141922;
+  --color-surface-hi: #1a2029;
+  --color-line: #232a36;
+  --color-line-soft: #1c222c;
+  --color-text: #e7e9ee;
+  --color-text-dim: #8b93a3;
+  --color-text-faint: #5a6272;
+  --color-brass: #e0a95e;
+  --color-brass-dim: #b6854a;
+  --color-brass-bg: rgba(224, 169, 94, 0.1);
+  --color-jade: #6fbf9a;
+
+  /* Light mode surfaces (theme toggle) */
+  --color-paper: #f6f4ef;
+  --color-paper-soft: #eeece4;
+  --color-paper-line: #ddd8cc;
+  --color-paper-text: #201c14;
+  --color-paper-dim: #6b6255;
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+
+:root {
+  --bg-base: var(--color-ink);
+  --bg-soft: var(--color-ink-soft);
+  --bg-surface: var(--color-surface);
+  --bg-surface-hi: var(--color-surface-hi);
+  --line: var(--color-line);
+  --line-soft: var(--color-line-soft);
+  --text-primary: var(--color-text);
+  --text-dim: var(--color-text-dim);
+  --text-faint: var(--color-text-faint);
+}
+
+body.theme-light {
+  --bg-base: var(--color-paper);
+  --bg-soft: var(--color-paper-soft);
+  --bg-surface: #ffffff;
+  --bg-surface-hi: #ffffff;
+  --line: var(--color-paper-line);
+  --line-soft: var(--color-paper-line);
+  --text-primary: var(--color-paper-text);
+  --text-dim: var(--color-paper-dim);
+  --text-faint: #948c7c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+::selection {
+  background: var(--color-brass);
+  color: var(--color-ink);
+}
+
+/* visible focus ring, kept even for mouse users on interactive elements */
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* custom cursor: hidden by default, enabled via JS on fine-pointer desktops */
+.cursor-enabled, .cursor-enabled * {
+  cursor: none !important;
+}
